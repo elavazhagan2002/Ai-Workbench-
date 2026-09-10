@@ -1,0 +1,1104 @@
+{
+  "name": "Responsible AI Impact Assessment",
+  "areas": [
+    {
+      "seq_no": 1,
+      "title": "AI System Identification & Scope",
+      "items": [
+        {
+          "sno": "1.1",
+          "assessment_item": "AI system name and owner identified",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Documented",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "1.2",
+          "assessment_item": "Business purpose and intended use cases defined",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Documented",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "1.3",
+          "assessment_item": "AI system classification completed",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Predictive AI",
+              "penalty_factor": 1.0
+            },
+            {
+              "label": "Generative AI",
+              "penalty_factor": 1.0
+            },
+            {
+              "label": "Autonomous AI",
+              "penalty_factor": 1.0
+            },
+            {
+              "label": "Decision-support",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "1.4",
+          "assessment_item": "Target users identified",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Internal users",
+              "penalty_factor": 1.0
+            },
+            {
+              "label": "Customers",
+              "penalty_factor": 1.0
+            },
+            {
+              "label": "Partners",
+              "penalty_factor": 1.0
+            },
+            {
+              "label": "Public",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "1.5",
+          "assessment_item": "Impacted stakeholders identified",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Employees",
+              "penalty_factor": 1.0
+            },
+            {
+              "label": "Customers",
+              "penalty_factor": 1.0
+            },
+            {
+              "label": "Patients",
+              "penalty_factor": 1.0
+            },
+            {
+              "label": "Communities",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "1.6",
+          "assessment_item": "AI usage boundaries documented",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Allowed uses",
+              "penalty_factor": 0.3333
+            },
+            {
+              "label": "Restricted uses",
+              "penalty_factor": 1.0
+            },
+            {
+              "label": "Prohibited uses",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "1.7",
+          "assessment_item": "AI lifecycle stage identified",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Development",
+              "penalty_factor": 1.0
+            },
+            {
+              "label": "Testing",
+              "penalty_factor": 1.0
+            },
+            {
+              "label": "Production",
+              "penalty_factor": 1.0
+            },
+            {
+              "label": "Retirement",
+              "penalty_factor": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seq_no": 2,
+      "title": "Business & Social Impact Assessment",
+      "items": [
+        {
+          "sno": "2.1",
+          "assessment_item": "Potential positive impact documented",
+          "category": "Business",
+          "allowed_checklist_items": [
+            {
+              "label": "Benefits identified",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "2.2",
+          "assessment_item": "Potential negative impacts identified",
+          "category": "Business",
+          "allowed_checklist_items": [
+            {
+              "label": "Risks documented",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "2.3",
+          "assessment_item": "Impact severity assessed",
+          "category": "Business",
+          "allowed_checklist_items": [
+            {
+              "label": "Low",
+              "penalty_factor": 0.25
+            },
+            {
+              "label": "Medium",
+              "penalty_factor": 0.5
+            },
+            {
+              "label": "High",
+              "penalty_factor": 0.75
+            },
+            {
+              "label": "Critical",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "2.4",
+          "assessment_item": "Affected groups identified",
+          "category": "Business",
+          "allowed_checklist_items": [
+            {
+              "label": "Vulnerable groups considered",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "2.5",
+          "assessment_item": "Human rights impact evaluated",
+          "category": "Business",
+          "allowed_checklist_items": [
+            {
+              "label": "Completed",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "2.6",
+          "assessment_item": "Risk of unintended consequences assessed",
+          "category": "Business",
+          "allowed_checklist_items": [
+            {
+              "label": "Completed",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "2.7",
+          "assessment_item": "Human oversight requirement determined",
+          "category": "Business",
+          "allowed_checklist_items": [
+            {
+              "label": "Required",
+              "penalty_factor": 1.0
+            },
+            {
+              "label": "Not required",
+              "penalty_factor": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seq_no": 3,
+      "title": "Data Assessment",
+      "items": [
+        {
+          "sno": "3.1",
+          "assessment_item": "Training data sources documented",
+          "category": "Security & Data Privacy",
+          "allowed_checklist_items": [
+            {
+              "label": "Complete inventory",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "3.2",
+          "assessment_item": "Data ownership established",
+          "category": "Security & Data Privacy",
+          "allowed_checklist_items": [
+            {
+              "label": "Owner identified",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "3.3",
+          "assessment_item": "Data collection purpose documented",
+          "category": "Security & Data Privacy",
+          "allowed_checklist_items": [
+            {
+              "label": "Defined",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "3.4",
+          "assessment_item": "Data quality assessed",
+          "category": "Security & Data Privacy",
+          "allowed_checklist_items": [
+            {
+              "label": "Accuracy",
+              "penalty_factor": 1.0
+            },
+            {
+              "label": "Completeness",
+              "penalty_factor": 1.0
+            },
+            {
+              "label": "Consistency",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "3.5",
+          "assessment_item": "Data relevance validated",
+          "category": "Security & Data Privacy",
+          "allowed_checklist_items": [
+            {
+              "label": "Appropriate for use case",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "3.6",
+          "assessment_item": "Data freshness evaluated",
+          "category": "Security & Data Privacy",
+          "allowed_checklist_items": [
+            {
+              "label": "Current enough",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "3.7",
+          "assessment_item": "Data lineage maintained",
+          "category": "Security & Data Privacy",
+          "allowed_checklist_items": [
+            {
+              "label": "Traceable",
+              "penalty_factor": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seq_no": 4,
+      "title": "Privacy Assessment",
+      "items": [
+        {
+          "sno": "4.1",
+          "assessment_item": "Personal data usage identified",
+          "category": "Security & Data Privacy",
+          "allowed_checklist_items": [
+            {
+              "label": "Yes",
+              "penalty_factor": 1.0
+            },
+            {
+              "label": "No",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "4.2",
+          "assessment_item": "Sensitive personal data identified",
+          "category": "Security & Data Privacy",
+          "allowed_checklist_items": [
+            {
+              "label": "Yes",
+              "penalty_factor": 1.0
+            },
+            {
+              "label": "No",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "4.3",
+          "assessment_item": "Privacy impact assessment completed",
+          "category": "Security & Data Privacy",
+          "allowed_checklist_items": [
+            {
+              "label": "Completed",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "4.4",
+          "assessment_item": "Consent requirements evaluated",
+          "category": "Security & Data Privacy",
+          "allowed_checklist_items": [
+            {
+              "label": "Applicable",
+              "penalty_factor": 1.0
+            },
+            {
+              "label": "Not applicable",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "4.5",
+          "assessment_item": "Data minimization applied",
+          "category": "Security & Data Privacy",
+          "allowed_checklist_items": [
+            {
+              "label": "Completed",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "4.6",
+          "assessment_item": "Data retention policy defined",
+          "category": "Security & Data Privacy",
+          "allowed_checklist_items": [
+            {
+              "label": "Defined",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "4.7",
+          "assessment_item": "Data deletion mechanism available",
+          "category": "Security & Data Privacy",
+          "allowed_checklist_items": [
+            {
+              "label": "Yes",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "4.8",
+          "assessment_item": "Anonymization/pseudonymization considered",
+          "category": "Security & Data Privacy",
+          "allowed_checklist_items": [
+            {
+              "label": "Applied",
+              "penalty_factor": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seq_no": 5,
+      "title": "Fairness & Bias Assessment",
+      "items": [
+        {
+          "sno": "5.1",
+          "assessment_item": "Bias assessment performed",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Completed",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "5.2",
+          "assessment_item": "Protected attributes evaluated where applicable",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Evaluated",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "5.3",
+          "assessment_item": "Training data representation assessed",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Balanced",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "5.4",
+          "assessment_item": "Model outcomes tested across groups",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Tested",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "5.5",
+          "assessment_item": "Disparate impact assessed",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Completed",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "5.6",
+          "assessment_item": "Bias mitigation techniques applied",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Yes",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "5.7",
+          "assessment_item": "Fairness metrics defined",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Defined",
+              "penalty_factor": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seq_no": 6,
+      "title": "Transparency & Explainability",
+      "items": [
+        {
+          "sno": "6.1",
+          "assessment_item": "AI decision-making process documented",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Complete",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "6.2",
+          "assessment_item": "Users informed when interacting with AI",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Yes",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "6.3",
+          "assessment_item": "AI-generated content identified",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Yes",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "6.4",
+          "assessment_item": "Explainability requirements defined",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Defined",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "6.5",
+          "assessment_item": "Model limitations documented",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Complete",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "6.6",
+          "assessment_item": "Confidence scores available (if applicable)",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Yes",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "6.7",
+          "assessment_item": "Explanation mechanism tested",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Tested",
+              "penalty_factor": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seq_no": 7,
+      "title": "Model Risk & Performance Assessment",
+      "items": [
+        {
+          "sno": "7.1",
+          "assessment_item": "Model performance metrics defined",
+          "category": "Technical",
+          "allowed_checklist_items": [
+            {
+              "label": "Defined",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "7.2",
+          "assessment_item": "Accuracy validated",
+          "category": "Technical",
+          "allowed_checklist_items": [
+            {
+              "label": "Completed",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "7.3",
+          "assessment_item": "Error scenarios identified",
+          "category": "Technical",
+          "allowed_checklist_items": [
+            {
+              "label": "Documented",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "7.4",
+          "assessment_item": "Model robustness tested",
+          "category": "Technical",
+          "allowed_checklist_items": [
+            {
+              "label": "Tested",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "7.5",
+          "assessment_item": "Edge cases evaluated",
+          "category": "Technical",
+          "allowed_checklist_items": [
+            {
+              "label": "Completed",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "7.6",
+          "assessment_item": "Hallucination risk assessed (GenAI)",
+          "category": "Technical",
+          "allowed_checklist_items": [
+            {
+              "label": "Assessed",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "7.7",
+          "assessment_item": "Model drift monitoring defined",
+          "category": "Technical",
+          "allowed_checklist_items": [
+            {
+              "label": "Planned",
+              "penalty_factor": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seq_no": 8,
+      "title": "Generative AI Specific Assessment",
+      "items": [
+        {
+          "sno": "8.1",
+          "assessment_item": "Foundation model identified",
+          "category": "Technical",
+          "allowed_checklist_items": [
+            {
+              "label": "Documented",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "8.2",
+          "assessment_item": "Prompt handling strategy defined",
+          "category": "Technical",
+          "allowed_checklist_items": [
+            {
+              "label": "Defined",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "8.3",
+          "assessment_item": "Prompt injection risks evaluated",
+          "category": "Technical",
+          "allowed_checklist_items": [
+            {
+              "label": "Tested",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "8.4",
+          "assessment_item": "Data leakage risks evaluated",
+          "category": "Technical",
+          "allowed_checklist_items": [
+            {
+              "label": "Tested",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "8.5",
+          "assessment_item": "Retrieval sources validated (RAG)",
+          "category": "Technical",
+          "allowed_checklist_items": [
+            {
+              "label": "Completed",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "8.6",
+          "assessment_item": "Generated output validation implemented",
+          "category": "Technical",
+          "allowed_checklist_items": [
+            {
+              "label": "Yes",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "8.7",
+          "assessment_item": "Human review process defined",
+          "category": "Technical",
+          "allowed_checklist_items": [
+            {
+              "label": "Yes",
+              "penalty_factor": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seq_no": 9,
+      "title": "Security Assessment",
+      "items": [
+        {
+          "sno": "9.1",
+          "assessment_item": "AI threat modeling completed",
+          "category": "Security & Data Privacy",
+          "allowed_checklist_items": [
+            {
+              "label": "Completed",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "9.2",
+          "assessment_item": "Access controls implemented",
+          "category": "Security & Data Privacy",
+          "allowed_checklist_items": [
+            {
+              "label": "Yes",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "9.3",
+          "assessment_item": "Authentication and authorization enforced",
+          "category": "Security & Data Privacy",
+          "allowed_checklist_items": [
+            {
+              "label": "Yes",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "9.4",
+          "assessment_item": "Model/data access restricted",
+          "category": "Security & Data Privacy",
+          "allowed_checklist_items": [
+            {
+              "label": "Yes",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "9.5",
+          "assessment_item": "Adversarial attacks evaluated",
+          "category": "Security & Data Privacy",
+          "allowed_checklist_items": [
+            {
+              "label": "Tested",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "9.6",
+          "assessment_item": "Logging enabled",
+          "category": "Security & Data Privacy",
+          "allowed_checklist_items": [
+            {
+              "label": "Yes",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "9.7",
+          "assessment_item": "Security monitoring implemented",
+          "category": "Security & Data Privacy",
+          "allowed_checklist_items": [
+            {
+              "label": "Yes",
+              "penalty_factor": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seq_no": 10,
+      "title": "Compliance & Regulatory Assessment",
+      "items": [
+        {
+          "sno": "10.1",
+          "assessment_item": "Applicable regulations identified",
+          "category": "Legal & Compliance",
+          "allowed_checklist_items": [
+            {
+              "label": "Completed",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "10.2",
+          "assessment_item": "Industry requirements assessed",
+          "category": "Legal & Compliance",
+          "allowed_checklist_items": [
+            {
+              "label": "Completed",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "10.3",
+          "assessment_item": "Contractual obligations reviewed",
+          "category": "Legal & Compliance",
+          "allowed_checklist_items": [
+            {
+              "label": "Completed",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "10.4",
+          "assessment_item": "Intellectual property risks evaluated",
+          "category": "Legal & Compliance",
+          "allowed_checklist_items": [
+            {
+              "label": "Completed",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "10.5",
+          "assessment_item": "Copyright/licensing compliance verified",
+          "category": "Legal & Compliance",
+          "allowed_checklist_items": [
+            {
+              "label": "Completed",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "10.6",
+          "assessment_item": "Audit requirements defined",
+          "category": "Legal & Compliance",
+          "allowed_checklist_items": [
+            {
+              "label": "Defined",
+              "penalty_factor": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seq_no": 11,
+      "title": "Human Oversight & Governance",
+      "items": [
+        {
+          "sno": "11.1",
+          "assessment_item": "Responsible AI owner assigned",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Assigned",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "11.2",
+          "assessment_item": "Human decision authority defined",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Defined",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "11.3",
+          "assessment_item": "Escalation process defined",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Defined",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "11.4",
+          "assessment_item": "Override capability available",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Yes",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "11.5",
+          "assessment_item": "User training provided",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Completed",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "11.6",
+          "assessment_item": "AI usage policy defined",
+          "category": "Governance",
+          "allowed_checklist_items": [
+            {
+              "label": "Approved",
+              "penalty_factor": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seq_no": 12,
+      "title": "Monitoring & Operations",
+      "items": [
+        {
+          "sno": "12.1",
+          "assessment_item": "Production monitoring implemented",
+          "category": "Operations",
+          "allowed_checklist_items": [
+            {
+              "label": "Yes",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "12.2",
+          "assessment_item": "Performance monitoring defined",
+          "category": "Operations",
+          "allowed_checklist_items": [
+            {
+              "label": "Yes",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "12.3",
+          "assessment_item": "Bias monitoring planned",
+          "category": "Operations",
+          "allowed_checklist_items": [
+            {
+              "label": "Yes",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "12.4",
+          "assessment_item": "Incident reporting process established",
+          "category": "Operations",
+          "allowed_checklist_items": [
+            {
+              "label": "Yes",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "12.5",
+          "assessment_item": "Model update process defined",
+          "category": "Operations",
+          "allowed_checklist_items": [
+            {
+              "label": "Yes",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "12.6",
+          "assessment_item": "Periodic reassessment scheduled",
+          "category": "Operations",
+          "allowed_checklist_items": [
+            {
+              "label": "Yes",
+              "penalty_factor": 1.0
+            }
+          ]
+        },
+        {
+          "sno": "12.7",
+          "assessment_item": "User feedbacks are captured",
+          "category": "Operations",
+          "allowed_checklist_items": [
+            {
+              "label": "Yes",
+              "penalty_factor": 1.0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "risk_classification_ranges": [
+    {
+      "level": "Critical",
+      "min_score": 0.0,
+      "max_score": 20.75
+    },
+    {
+      "level": "High",
+      "min_score": 20.7501,
+      "max_score": 41.5
+    },
+    {
+      "level": "Medium",
+      "min_score": 41.5001,
+      "max_score": 62.25
+    },
+    {
+      "level": "Low",
+      "min_score": 62.2501,
+      "max_score": 83.0
+    }
+  ]
+}

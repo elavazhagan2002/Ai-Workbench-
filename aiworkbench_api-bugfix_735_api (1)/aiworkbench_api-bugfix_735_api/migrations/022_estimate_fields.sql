@@ -1,0 +1,3 @@
+-- Estimate assignment + cost projection JSON on use_cases (startup ALTER via database.run_migrations).
+-- estimate_owner, estimate_assigned_by, estimate_assigned_dt, estimate_due_date, estimate_completed_dt, estimate_data
+-- SystemConfig.config_data.currency (default USD)

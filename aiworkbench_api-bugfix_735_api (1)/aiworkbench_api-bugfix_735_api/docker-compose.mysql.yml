@@ -1,0 +1,41 @@
+version: '3.8'
+
+# MySQL-specific docker-compose override
+# Use: docker-compose -f docker-compose.yml -f docker-compose.mysql.yml up
+# This enables MySQL service and updates backend dependencies
+
+services:
+  backend:
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      - DATABASE_TYPE=mysql
+      - MYSQL_HOST=mysql
+
+  mysql:
+    image: mysql:8.0
+    container_name: ai-workbench-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-rootpassword}
+      - MYSQL_DATABASE=${MYSQL_DATABASE:-ai_workbench}
+      - MYSQL_USER=${MYSQL_USER:-workbench_user}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD:-workbench_password}
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      # Persist MySQL data
+      - mysql-data:/var/lib/mysql
+    restart: unless-stopped
+    networks:
+      - ai-workbench-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-rootpassword}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  mysql-data:
+    driver: local

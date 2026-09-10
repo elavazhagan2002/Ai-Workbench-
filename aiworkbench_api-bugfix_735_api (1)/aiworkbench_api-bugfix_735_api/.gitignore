@@ -1,0 +1,16 @@
+logs/
+file_storage/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+.env
+.env_local
+venv/
+demo_videos/
+demos/
+code_quality/
+.ruff_cache/
+scripts/

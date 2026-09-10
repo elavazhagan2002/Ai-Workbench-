@@ -1,0 +1,2 @@
+-- Migration 012: Add 'critical' to risk likelihood and impact levels
+-- SQLite: table rebuild is handled automatically on API startup via database.py

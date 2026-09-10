@@ -1,0 +1,65 @@
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+ignore = ["E501", "B008", "B904"]
+
+[tool.ruff.lint.per-file-ignores]
+"run.py" = ["E402"]
+
+[tool.bandit]
+exclude_dirs = ["tests", "migrations", "file_storage"]
+skips = ["B104", "B105", "B106", "B608"]
+
+[tool.pylint.main]
+max-line-length = 120
+jobs = 0
+py-version = "3.11"
+ignore-paths = ["^migrations/"]
+
+[tool.pylint.messages_control]
+disable = [
+  "C0114",
+  "C0115",
+  "C0116",
+  "missing-module-docstring",
+  "missing-class-docstring",
+  "missing-function-docstring",
+  "too-few-public-methods",
+  "too-many-locals",
+  "too-many-arguments",
+  "too-many-branches",
+  "too-many-statements",
+  "too-many-lines",
+  "too-many-return-statements",
+  "too-many-instance-attributes",
+  "too-many-positional-arguments",
+  "duplicate-code",
+  "invalid-name",
+  "logging-fstring-interpolation",
+  "broad-exception-caught",
+  "raise-missing-from",
+  "wrong-import-order",
+  "wrong-import-position",
+  "import-outside-toplevel",
+  "redefined-outer-name",
+  "reimported",
+  "not-callable",
+  "no-else-return",
+  "unnecessary-comprehension",
+  "use-maxsplit-arg",
+  "simplifiable-condition",
+  "trailing-newlines",
+  "missing-final-newline",
+  "duplicate-value",
+  "unused-argument",
+  "line-too-long",
+  "trailing-whitespace",
+  "unused-variable",
+  "unused-import",
+]
+
+[tool.pylint.format]
+max-line-length = 120
