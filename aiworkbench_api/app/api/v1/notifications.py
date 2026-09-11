@@ -6,13 +6,15 @@ from sqlalchemy.orm import Session
 
 from app.core.database import get_db
 from app.middleware.auth_middleware import get_current_user_id
-from app.models import User
+from app.models import UseCase, User
 from app.services.notification_service import (
+    current_notification_link,
     dismiss_all_notifications,
     dismiss_notification,
     list_notifications_for_user,
     mark_all_notifications_read,
     mark_notification_read,
+    resolve_notification_for_user,
     serialize_notification,
     unread_count_for_user,
 )
@@ -56,10 +58,23 @@ async def list_notifications(
         filter_group=filter_group,
     )
     names = _actor_names(db, {r.actor_user_id for r in rows if r.actor_user_id})
+    use_case_ids = {
+        row.entity_id
+        for row in rows
+        if row.entity_type == "use_case" and row.entity_id
+    }
+    use_cases = {
+        item.use_case_id: item
+        for item in db.query(UseCase).filter(UseCase.use_case_id.in_(use_case_ids)).all()
+    } if use_case_ids else {}
     return {
         "unread_count": unread_count_for_user(db, user_id),
         "items": [
-            serialize_notification(r, actor_name=names.get(r.actor_user_id) if r.actor_user_id else None)
+            serialize_notification(
+                r,
+                actor_name=names.get(r.actor_user_id) if r.actor_user_id else None,
+                link_override=current_notification_link(r, use_cases),
+            )
             for r in rows
         ],
     }
@@ -69,6 +84,38 @@ async def list_notifications(
 async def get_unread_count(request: Request, db: Session = Depends(get_db)):
     user_id = get_current_user_id(request)
     return {"unread_count": unread_count_for_user(db, user_id)}
+
+
+@router.get("/{notification_id}/resolve")
+async def resolve_notification(
+    notification_id: str,
+    request: Request,
+    db: Session = Depends(get_db),
+):
+    """Revalidate access and return the notification's current deep link."""
+    user_id = get_current_user_id(request)
+    resolved = resolve_notification_for_user(db, user_id, notification_id)
+    if not resolved:
+        stale_row = dismiss_notification(db, user_id, notification_id)
+        if stale_row:
+            raise HTTPException(
+                status_code=status.HTTP_410_GONE,
+                detail=(
+                    "This is an old notification. The use case, domain, assignment, "
+                    "role, or permission changed, so this action is no longer available."
+                ),
+            )
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Notification not found.",
+        )
+    row, link = resolved
+    actor_names = _actor_names(db, {row.actor_user_id} if row.actor_user_id else set())
+    return serialize_notification(
+        row,
+        actor_name=actor_names.get(row.actor_user_id) if row.actor_user_id else None,
+        link_override=link,
+    )
 
 
 @router.patch("/{notification_id}/read")

@@ -1449,6 +1449,7 @@ def notify_risk_assigned(
     assignee: User | None,
     actor: User | None,
     risk_title: str | None,
+    risk_review_id: int,
 ) -> None:
     if not assignee:
         return
@@ -1471,7 +1472,11 @@ def notify_risk_assigned(
             section="risks",
         ),
         actions=["open"],
-        payload={"use_case_title": title, "risk_title": risk_label},
+        payload={
+            "use_case_title": title,
+            "risk_title": risk_label,
+            "risk_review_id": risk_review_id,
+        },
         commit=True,
     )
 

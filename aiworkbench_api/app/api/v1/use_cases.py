@@ -4764,6 +4764,7 @@ async def create_use_case_risk_review(
                 assignee=assignee,
                 actor=actor,
                 risk_title=item.risk_title,
+                risk_review_id=item.risk_review_id,
             )
     return item
 
@@ -4816,6 +4817,7 @@ async def update_use_case_risk_review(
                 assignee=assignee,
                 actor=actor,
                 risk_title=item.risk_title,
+                risk_review_id=item.risk_review_id,
             )
     return item
 
