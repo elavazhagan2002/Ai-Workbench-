@@ -1,3 +1,0 @@
--- ROI + AI Assessment assignment fields on use_cases (startup ALTER via database.run_migrations).
--- roi_owner, roi_assigned_by, roi_assigned_dt, roi_due_date, roi_completed_dt, roi_data
--- assessment_owner, assessment_assigned_by, assessment_assigned_dt, assessment_due_date, assessment_completed_dt
