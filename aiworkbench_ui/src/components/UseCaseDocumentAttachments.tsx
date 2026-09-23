@@ -92,7 +92,7 @@ function inferPreviewKind(
 
   const extension = getFileExtension(fileName);
   if (extension === '.pdf') return 'pdf';
-  if (['.html', '.htm', '.ppt', '.pptx', '.xls', '.xlsx'].includes(extension)) return 'html';
+  if (['.html', '.htm', '.docx', '.ppt', '.pptx', '.xls', '.xlsx'].includes(extension)) return 'html';
   if (['.png', '.jpg', '.jpeg', '.webp', '.gif'].includes(extension)) return 'image';
   return 'unavailable';
 }

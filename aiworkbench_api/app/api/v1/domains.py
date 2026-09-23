@@ -249,17 +249,10 @@ async def create_domain(
     db.add(new_domain)
     db.flush()
 
-    # Grant access to creator
-    domain_access = DomainAccess(
-        domain_id=new_domain.domain_id,
-        user_id=user_id,
-        created_by=user_id,
-        modified_by=user_id
-    )
-    db.add(domain_access)
-
-    # Owner must be able to open and govern this domain (even when not the creator).
-    _ensure_domain_access(db, new_domain.domain_id, owner_id, user_id)
+    # Grant access to the creator and, when different, to the owner.
+    _ensure_domain_access(db, new_domain.domain_id, user_id, user_id)
+    if owner_id != user_id:
+        _ensure_domain_access(db, new_domain.domain_id, owner_id, user_id)
 
     # Create audit log
     audit_log = AuditLog(

@@ -6,11 +6,13 @@ import base64
 import io
 import re
 import struct
+import zipfile
 from dataclasses import dataclass
 from datetime import date, datetime, time
 from html import escape
 from html.parser import HTMLParser
 from urllib.parse import urlparse
+from xml.etree import ElementTree
 
 from app.core.logging_config import logger
 
@@ -395,6 +397,10 @@ def render_document_preview_html(category: str, file_name: str, content: bytes) 
     category = (category or "").upper()
     extension = _file_extension(file_name)
     is_zip = content.startswith(b"PK")
+    if category == "DOC":
+        if extension != ".docx" or not is_zip:
+            raise ValueError("Only DOCX files can be previewed")
+        return render_docx_preview_html(content, file_name)
     if category == "PPT":
         if extension == ".ppt" and not is_zip:
             return render_ppt_preview_html(content, file_name)
@@ -413,14 +419,14 @@ class OfficePreviewResult:
 
 
 def render_office_document_preview(category: str, file_name: str, content: bytes) -> OfficePreviewResult:
-    """Convert PPT/XLS files for in-app preview using python-pptx / openpyxl HTML."""
+    """Convert supported Office files into HTML for in-app preview."""
     html = render_document_preview_html(category, file_name, content)
     return OfficePreviewResult(content=html.encode("utf-8"), media_type="text/html; charset=utf-8")
 
 
 def _file_extension(file_name: str) -> str:
     name = (file_name or "").lower()
-    for extension in (".pptx", ".ppt", ".xlsx", ".xls", ".html", ".htm"):
+    for extension in (".docx", ".doc", ".pptx", ".ppt", ".xlsx", ".xls", ".html", ".htm"):
         if name.endswith(extension):
             return extension
     dot = name.rfind(".")
@@ -451,6 +457,86 @@ def _css_color(color) -> str | None:
         return f"#{str(rgb)}"
     except Exception:
         return None
+
+
+_DOCX_NS = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
+
+
+def _docx_text(element: ElementTree.Element) -> str:
+    parts: list[str] = []
+    for child in element.iter():
+        if child.tag == f"{_DOCX_NS}t":
+            parts.append(child.text or "")
+        elif child.tag == f"{_DOCX_NS}tab":
+            parts.append("\t")
+        elif child.tag == f"{_DOCX_NS}br":
+            parts.append("\n")
+    return "".join(parts)
+
+
+def _docx_inline_html(run: ElementTree.Element) -> str:
+    text = escape(_docx_text(run)).replace("\n", "<br>").replace("\t", "&emsp;")
+    properties = run.find(f"{_DOCX_NS}rPr")
+    if properties is None:
+        return text
+    if properties.find(f"{_DOCX_NS}b") is not None:
+        text = f"<strong>{text}</strong>"
+    if properties.find(f"{_DOCX_NS}i") is not None:
+        text = f"<em>{text}</em>"
+    if properties.find(f"{_DOCX_NS}u") is not None:
+        text = f"<u>{text}</u>"
+    return text
+
+
+def _docx_paragraph_html(paragraph: ElementTree.Element) -> str:
+    content: list[str] = []
+    for child in paragraph:
+        if child.tag == f"{_DOCX_NS}r":
+            content.append(_docx_inline_html(child))
+        elif child.tag == f"{_DOCX_NS}hyperlink":
+            content.append(escape(_docx_text(child)).replace("\n", "<br>"))
+    text = "".join(content)
+    if not text.strip():
+        return "<p>&nbsp;</p>"
+    return f"<p>{text}</p>"
+
+
+def _docx_table_html(table: ElementTree.Element) -> str:
+    rows: list[str] = []
+    for row in table.findall(f"{_DOCX_NS}tr"):
+        cells: list[str] = []
+        for cell in row.findall(f"{_DOCX_NS}tc"):
+            cell_content = "".join(
+                _docx_paragraph_html(paragraph)
+                for paragraph in cell.findall(f"{_DOCX_NS}p")
+            )
+            cells.append(f"<td>{cell_content or '&nbsp;'}</td>")
+        rows.append(f"<tr>{''.join(cells)}</tr>")
+    return f"<table><tbody>{''.join(rows)}</tbody></table>"
+
+
+def render_docx_preview_html(content: bytes, file_name: str) -> str:
+    """Render readable text and tables from a DOCX without executing document content."""
+    with zipfile.ZipFile(io.BytesIO(content)) as archive:
+        document_xml = archive.read("word/document.xml")
+    document = ElementTree.fromstring(document_xml)
+    body = document.find(f"{_DOCX_NS}body")
+    if body is None:
+        raise ValueError("DOCX document body is missing")
+
+    parts: list[str] = []
+    for child in body:
+        if child.tag == f"{_DOCX_NS}p":
+            parts.append(_docx_paragraph_html(child))
+        elif child.tag == f"{_DOCX_NS}tbl":
+            parts.append(_docx_table_html(child))
+    return _preview_shell(
+        file_name,
+        "".join(parts) or "<p>No previewable document content found.</p>",
+        "body{background:#fff;} .preview-wrap{max-width:900px;margin:0 auto;background:#fff;}"
+        "p{line-height:1.6;margin:0 0 12px;} table{border-collapse:collapse;width:100%;margin:16px 0;}"
+        "td{border:1px solid #cbd5e1;padding:8px;vertical-align:top;}",
+    )
 
 
 def _pct(emu: int | None, total: int) -> float:

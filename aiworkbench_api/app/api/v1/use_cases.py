@@ -2010,7 +2010,7 @@ async def preview_use_case_document(
             headers=preview_headers,
         )
 
-    if category in {"PPT", "XLS"}:
+    if category in {"DOC", "PPT", "XLS"}:
         try:
             preview = render_office_document_preview(category, doc.file_name, content)
         except Exception as exc:

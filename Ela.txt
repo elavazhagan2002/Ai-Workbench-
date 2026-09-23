@@ -1,0 +1,28 @@
+## I added in-app preview support for .docx files.
+
+//Backend
+
+Updated document_preview_service.py
+Reads the DOCX file as a ZIP/XML document.
+Extracts paragraphs, bold/italic/underline text, line breaks, and tables.
+Converts the content into safe HTML.
+Escapes document text to prevent HTML/script injection.
+
+Updated use_cases.py
+Routes DOCX files through the preview converter.
+Returns the generated HTML to the frontend.
+
+//frontend
+Updated UseCaseResourcesModal.tsx
+
+Updated UseCaseDocumentAttachments.tsx
+Recognizes .docx as an HTML-previewable file.
+Displays the generated HTML inside the existing preview modal.
+
+##User Flow
+
+User clicks Open on a DOCX file.
+Frontend calls the document preview API.
+Backend reads and converts the DOCX content to HTML.
+Frontend displays the HTML in a secure sandboxed iframe.
+The original file can still be downloaded.
