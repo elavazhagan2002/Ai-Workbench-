@@ -1,0 +1,56 @@
+.docx-preview-viewport {
+  height: 100%;
+  min-height: 0;
+  overflow: auto;
+  background: #e5e7eb;
+  padding: 0;
+}
+
+.docx-preview-stage {
+  width: 100%;
+  min-width: 0;
+  transform-origin: top center;
+  transition: transform 160ms ease-out;
+}
+
+.docx-preview-status {
+  position: absolute;
+  z-index: 1;
+  inset: 1rem 1rem auto;
+  margin: 0 auto;
+  width: fit-content;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  background: rgb(255 255 255 / 0.95);
+  padding: 0.5rem 0.75rem;
+  color: #475569;
+  font-size: 0.875rem;
+}
+
+.docx-preview-error {
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+
+.docx-preview-stage .docx-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+  background: #e5e7eb;
+  padding: 30px 30px 0;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.docx-preview-stage .docx-wrapper > section.docx {
+  flex: 0 0 auto;
+  background: #fff;
+  box-shadow: 0 4px 16px rgb(15 23 42 / 0.18);
+  margin-bottom: 24px;
+}
+
+@media (max-width: 640px) {
+  .docx-preview-stage .docx-wrapper {
+    padding: 16px 12px 0;
+  }
+}

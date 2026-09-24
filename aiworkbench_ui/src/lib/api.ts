@@ -1543,7 +1543,7 @@ async getPublicStats(): Promise<{ domains_count: number; use_cases_count: number
     const response = await fetch(`${this.baseUrl}/use-cases/${useCaseId}/documents/${documentId}/preview`, {
       headers: {
         'Authorization': `Bearer ${token}`,
-        'Accept': 'application/json, application/pdf, text/html, image/*',
+        'Accept': 'application/json, application/pdf, text/html, image/*, application/vnd.openxmlformats-officedocument.wordprocessingml.document',
       },
       credentials: 'include',
     });

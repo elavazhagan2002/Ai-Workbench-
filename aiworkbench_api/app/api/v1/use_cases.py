@@ -1997,6 +1997,17 @@ async def preview_use_case_document(
             },
         )
 
+    if category == "DOC" and doc.file_name.lower().endswith(".docx"):
+        return FileResponse(
+            path=str(file_path),
+            media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            headers={
+                "Content-Disposition": f'inline; filename="{safe_name}"',
+                "X-Content-Type-Options": "nosniff",
+                "Cache-Control": "no-store",
+            },
+        )
+
     preview_headers = {
         "Content-Disposition": f'inline; filename="{safe_name}"',
         "Content-Security-Policy": HTML_PREVIEW_CSP,
@@ -2010,7 +2021,7 @@ async def preview_use_case_document(
             headers=preview_headers,
         )
 
-    if category in {"DOC", "PPT", "XLS"}:
+    if category in {"PPT", "XLS"}:
         try:
             preview = render_office_document_preview(category, doc.file_name, content)
         except Exception as exc:

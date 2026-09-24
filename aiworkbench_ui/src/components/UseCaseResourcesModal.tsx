@@ -67,24 +67,9 @@ const DOCUMENT_UPLOAD_EXTENSIONS = [
   '.txz',
 ];
 
-const PREVIEW_SUPPORTED_EXTENSIONS = new Set([
-  '.pdf',
-  '.docx',
-  '.html',
-  '.htm',
-  '.ppt',
-  '.pptx',
-  '.xls',
-  '.xlsx',
-  '.png',
-  '.jpg',
-  '.jpeg',
-  '.webp',
-  '.gif',
-]);
 const DOCUMENT_UPLOAD_EXTENSION_SET = new Set(DOCUMENT_UPLOAD_EXTENSIONS);
 
-type PreviewKind = 'pdf' | 'image' | 'html' | 'unavailable';
+type PreviewKind = 'pdf' | 'docx' | 'image' | 'html' | 'unavailable';
 
 interface DemoVideoOption {
   path: string;
@@ -226,17 +211,20 @@ function isPresentationFile(fileName: string) {
 function inferPreviewKind(documentType: string | null | undefined, mimeType: string | null | undefined, fileName: string): PreviewKind {
   const normalizedMime = (mimeType || '').toLowerCase();
   if (normalizedMime.includes('application/pdf')) return 'pdf';
+  if (normalizedMime.includes('application/vnd.openxmlformats-officedocument.wordprocessingml.document')) return 'docx';
   if (normalizedMime.startsWith('image/')) return 'image';
   if (normalizedMime.includes('text/html')) return 'html';
 
   const normalizedType = (documentType || '').toUpperCase();
   if (normalizedType === 'PDF') return 'pdf';
+  if (normalizedType === 'DOC') return 'docx';
   if (normalizedType === 'HTML') return 'html';
   if (normalizedType === 'IMAGE') return 'image';
 
   const extension = getFileExtension(fileName);
   if (extension === '.pdf') return 'pdf';
-  if (['.html', '.htm', '.docx', '.ppt', '.pptx', '.xls', '.xlsx'].includes(extension)) return 'html';
+  if (extension === '.docx') return 'docx';
+  if (['.html', '.htm', '.ppt', '.pptx', '.xls', '.xlsx'].includes(extension)) return 'html';
   if (['.png', '.jpg', '.jpeg', '.webp', '.gif'].includes(extension)) return 'image';
   return 'unavailable';
 }
@@ -790,6 +778,17 @@ export default function UseCaseResourcesModal({
           return;
         }
 
+        if (previewKind === 'docx') {
+          const objectUrl = URL.createObjectURL(preview.blob);
+          setViewerObjectUrl(objectUrl);
+          setViewerPreview({
+            kind: 'docx',
+            src: objectUrl,
+            blob: preview.blob,
+          });
+          return;
+        }
+
         if (previewKind === 'html') {
           const html = await preview.blob.text();
           setViewerPreview({
@@ -917,9 +916,9 @@ export default function UseCaseResourcesModal({
               key={item.document_id}
               className="flex flex-col gap-3 rounded-xl border border-slate-200 px-3 py-3 dark:border-slate-700 sm:flex-row sm:items-center sm:justify-between"
             >
-              <div className="min-w-0">
+              <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="break-words font-medium text-slate-800 dark:text-slate-200">{displayName}</span>
+                  <span className="min-w-0 break-all font-medium text-slate-800 dark:text-slate-200">{displayName}</span>
                   {showInfographicType && infographicTypeLabel && (
                     <span className="rounded-full bg-blue-100 px-2 py-0.5 text-[11px] font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">
                       {infographicTypeLabel}
@@ -935,7 +934,7 @@ export default function UseCaseResourcesModal({
                   )}
                 </div>
               </div>
-              <div className="flex flex-wrap items-center gap-2 sm:shrink-0">
+              <div className="flex shrink-0 flex-wrap items-center gap-2">
                 <button
                   type="button"
                   onClick={() => handleOpenDocument(item)}

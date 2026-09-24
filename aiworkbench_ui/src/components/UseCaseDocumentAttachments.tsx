@@ -33,7 +33,7 @@ const DOCUMENT_UPLOAD_EXTENSIONS = [
   '.txz',
 ];
 
-type PreviewKind = 'pdf' | 'image' | 'html' | 'unavailable';
+type PreviewKind = 'pdf' | 'docx' | 'image' | 'html' | 'unavailable';
 export type DocumentAttachmentSource = 'reference' | 'technical_analysis';
 
 interface UseCaseDocumentAttachmentsProps {
@@ -82,17 +82,20 @@ function inferPreviewKind(
 ): PreviewKind {
   const normalizedMime = (mimeType || '').toLowerCase();
   if (normalizedMime.includes('application/pdf')) return 'pdf';
+  if (normalizedMime.includes('application/vnd.openxmlformats-officedocument.wordprocessingml.document')) return 'docx';
   if (normalizedMime.startsWith('image/')) return 'image';
   if (normalizedMime.includes('text/html')) return 'html';
 
   const normalizedType = (documentType || '').toUpperCase();
   if (normalizedType === 'PDF') return 'pdf';
+  if (normalizedType === 'DOC') return 'docx';
   if (normalizedType === 'HTML') return 'html';
   if (normalizedType === 'IMAGE') return 'image';
 
   const extension = getFileExtension(fileName);
   if (extension === '.pdf') return 'pdf';
-  if (['.html', '.htm', '.docx', '.ppt', '.pptx', '.xls', '.xlsx'].includes(extension)) return 'html';
+  if (extension === '.docx') return 'docx';
+  if (['.html', '.htm', '.ppt', '.pptx', '.xls', '.xlsx'].includes(extension)) return 'html';
   if (['.png', '.jpg', '.jpeg', '.webp', '.gif'].includes(extension)) return 'image';
   return 'unavailable';
 }
@@ -314,6 +317,14 @@ export default function UseCaseDocumentAttachments({
       if (preview.blob && previewKind !== 'unavailable') {
         const objectUrl = URL.createObjectURL(preview.blob);
         setViewerObjectUrl(objectUrl);
+        if (previewKind === 'docx') {
+          setViewerPreview({
+            kind: 'docx',
+            src: objectUrl,
+            blob: preview.blob,
+          });
+          return;
+        }
         if (previewKind === 'html') {
           setViewerPreview({
             kind: 'html',
@@ -513,7 +524,7 @@ export default function UseCaseDocumentAttachments({
             key={doc.document_id}
             className="flex flex-wrap items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 dark:border-slate-700"
           >
-            <span className="truncate font-medium text-slate-800 dark:text-slate-200">{doc.file_name}</span>
+            <span className="min-w-0 flex-1 break-all font-medium text-slate-800 dark:text-slate-200">{doc.file_name}</span>
             {doc.document_type ? (
               <span className="rounded-full bg-cyan-500/15 px-2 py-0.5 text-[11px] font-medium text-cyan-800 dark:text-cyan-300">
                 {doc.document_type}

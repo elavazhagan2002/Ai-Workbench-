@@ -16,6 +16,7 @@ import {
   ZoomIn,
   ZoomOut,
 } from 'lucide-react';
+import DocxPreview from './DocxPreview';
 
 export type ResourcePreviewContent =
   | {
@@ -23,6 +24,11 @@ export type ResourcePreviewContent =
       src: string;
       mimeType?: string | null;
       pageOnly?: boolean;
+    }
+  | {
+      kind: 'docx';
+      src: string;
+      blob?: Blob;
     }
   | {
       kind: 'image';
@@ -175,6 +181,7 @@ export default function ResourceViewerModal({
   const [maximized, setMaximized] = useState(false);
   const [restoredFrame, setRestoredFrame] = useState<FrameRect | null>(null);
   const [pdfZoom, setPdfZoom] = useState(1);
+  const [docxZoom, setDocxZoom] = useState(1);
   const [imageZoom, setImageZoom] = useState(1);
   const [htmlZoom, setHtmlZoom] = useState(1);
   const [imageOffset, setImageOffset] = useState({ x: 0, y: 0 });
@@ -189,6 +196,7 @@ export default function ResourceViewerModal({
   useEffect(() => {
     if (!isOpen) return;
     setPdfZoom(1);
+    setDocxZoom(1);
     setImageZoom(1);
     setHtmlZoom(1);
     setImageOffset({ x: 0, y: 0 });
@@ -342,21 +350,24 @@ export default function ResourceViewerModal({
   const showZoom = Boolean(
     preview &&
       (preview.kind === 'pdf' ||
+        preview.kind === 'docx' ||
         preview.kind === 'image' ||
         (preview.kind === 'html' && !preview.pageOnly))
   );
 
   const zoomValue =
-    preview?.kind === 'pdf' ? pdfZoom : preview?.kind === 'image' ? imageZoom : htmlZoom;
+    preview?.kind === 'pdf' ? pdfZoom : preview?.kind === 'docx' ? docxZoom : preview?.kind === 'image' ? imageZoom : htmlZoom;
 
   function bumpZoom(delta: number) {
     if (preview?.kind === 'pdf') setPdfZoom((current) => clamp(current + delta, MIN_ZOOM, MAX_ZOOM));
+    else if (preview?.kind === 'docx') setDocxZoom((current) => clamp(current + delta, MIN_ZOOM, MAX_ZOOM));
     else if (preview?.kind === 'image') setImageZoom((current) => clamp(current + delta, MIN_ZOOM, MAX_ZOOM));
     else if (preview?.kind === 'html') setHtmlZoom((current) => clamp(current + delta, MIN_ZOOM, MAX_ZOOM));
   }
 
   function resetZoom() {
     if (preview?.kind === 'pdf') setPdfZoom(1);
+    else if (preview?.kind === 'docx') setDocxZoom(1);
     else if (preview?.kind === 'image') {
       setImageZoom(1);
       setImageOffset({ x: 0, y: 0 });
@@ -421,6 +432,10 @@ export default function ResourceViewerModal({
           </div>
         </div>
       );
+    }
+
+    if (preview.kind === 'docx') {
+      return <DocxPreview src={preview.src} blob={preview.blob} zoom={docxZoom} />;
     }
 
     if (preview.kind === 'image') {
